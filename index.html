@@ -42,7 +42,7 @@
   }
   nav.scrolled { height: 58px; background: rgba(26,18,8,0.97); }
   .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--saffron), var(--gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 0 2px rgba(212,160,23,0.3); }
+  .nav-logo-svg { width: 44px; height: 44px; flex-shrink: 0; }
   .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--cream); letter-spacing: 0.02em; }
   .nav-logo-text span { color: var(--gold-light); }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
@@ -105,8 +105,10 @@
   .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
   .dish-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 2px 12px rgba(26,18,8,0.06); transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; }
   .dish-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(26,18,8,0.12); }
-  .dish-visual { height: 200px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; font-size: 5rem; background: linear-gradient(135deg, var(--cream-dark), var(--cream)); }
-  .dish-spice-level { position: absolute; top: 12px; right: 12px; background: rgba(26,18,8,0.7); color: var(--white); font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
+  .dish-visual { height: 200px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .dish-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .dish-visual-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 4.5rem; background: linear-gradient(135deg, var(--cream-dark), var(--cream)); }
+  .dish-spice-level { position: absolute; top: 12px; right: 12px; background: rgba(26,18,8,0.7); color: var(--white); font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; backdrop-filter: blur(4px); }
   .dish-badge-new { position: absolute; top: 12px; left: 12px; background: var(--saffron); color: var(--white); font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; }
   .dish-info { padding: 1.25rem 1.5rem 1.5rem; }
   .dish-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--dark); margin-bottom: 0.35rem; }
@@ -148,12 +150,43 @@
   .zone-pill { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--white); font-size: 0.875rem; font-weight: 500; padding: 10px 20px; border-radius: 100px; transition: background 0.2s, border-color 0.2s; }
   .zone-pill:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); }
   .zone-pill.highlight { background: rgba(212,160,23,0.25); border-color: var(--gold-light); color: var(--gold-light); }
+
+  /* Delivery calculator */
+  .delivery-calc { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 2rem; max-width: 680px; margin: 0 auto 2.5rem; text-align: left; }
+  .delivery-calc-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--white); margin-bottom: 0.5rem; text-align: center; }
+  .delivery-calc-sub { font-size: 0.85rem; color: rgba(255,255,255,0.5); text-align: center; margin-bottom: 1.5rem; }
+  .delivery-input-row { display: flex; gap: 10px; }
+  .delivery-input-row input { flex: 1; padding: 12px 16px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 12px; background: rgba(255,255,255,0.08); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+  .delivery-input-row input::placeholder { color: rgba(255,255,255,0.35); }
+  .delivery-input-row input:focus { border-color: var(--gold-light); background: rgba(255,255,255,0.12); }
+  .delivery-calc-btn { padding: 12px 22px; background: var(--gold); color: var(--dark); border: none; border-radius: 12px; font-weight: 700; font-size: 0.875rem; cursor: pointer; transition: transform 0.2s, background 0.2s; white-space: nowrap; }
+  .delivery-calc-btn:hover { transform: translateY(-1px); background: var(--gold-light); }
+  .delivery-result { margin-top: 1.25rem; padding: 1rem 1.25rem; background: rgba(255,255,255,0.06); border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); display: none; }
+  .delivery-result.show { display: block; }
+  .delivery-result-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.88rem; }
+  .delivery-result-row:last-child { border-bottom: none; font-weight: 700; font-size: 1rem; color: var(--gold-light); }
+  .delivery-result-label { color: rgba(255,255,255,0.6); }
+  .delivery-result-val { color: var(--white); font-weight: 600; }
+  .delivery-result-row:last-child .delivery-result-val { color: var(--gold-light); }
+  .delivery-error { margin-top: 1rem; font-size: 0.85rem; color: #fca5a5; display: none; }
+  .delivery-error.show { display: block; }
+  .delivery-loading { margin-top: 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); display: none; }
+  .delivery-loading.show { display: flex; align-items: center; gap: 8px; }
+  .delivery-spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--gold-light); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .delivery-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 800px; margin: 0 auto; }
   .delivery-info-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 1.5rem; transition: background 0.2s; }
   .delivery-info-card:hover { background: rgba(255,255,255,0.11); }
   .delivery-info-icon { font-size: 2rem; margin-bottom: 0.75rem; }
   .delivery-info-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
   .delivery-info-val { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+
+  /* Pricing table */
+  .pricing-table { width: 100%; border-collapse: collapse; margin-top: 1.25rem; font-size: 0.82rem; }
+  .pricing-table th { text-align: left; color: rgba(255,255,255,0.4); font-weight: 500; padding: 4px 0; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.72rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .pricing-table td { padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.75); }
+  .pricing-table tr:last-child td { border-bottom: none; }
+  .pricing-table .free-tag { color: #6ee7b7; font-weight: 600; }
 
   #contact { background: var(--cream); }
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1100px; margin: 0 auto; align-items: start; }
@@ -164,6 +197,11 @@
   .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1.5px solid var(--cream-dark); border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--dark); background: var(--cream); transition: border-color 0.2s, background 0.2s; outline: none; }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--saffron); background: var(--white); }
   .form-group textarea { min-height: 80px; resize: vertical; }
+  .address-with-calc { position: relative; }
+  .address-calc-badge { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 0.72rem; font-weight: 600; color: var(--saffron); cursor: pointer; background: rgba(232,100,26,0.08); padding: 3px 8px; border-radius: 100px; transition: background 0.2s; white-space: nowrap; }
+  .address-calc-badge:hover { background: rgba(232,100,26,0.15); }
+  .inline-delivery-info { margin-top: 0.5rem; padding: 10px 14px; background: rgba(46,107,62,0.08); border: 1px solid rgba(46,107,62,0.2); border-radius: 10px; font-size: 0.82rem; color: var(--green-spice); display: none; }
+  .inline-delivery-info.show { display: block; }
   .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
   .payment-option { border: 2px solid var(--cream-dark); border-radius: 14px; padding: 14px 12px; cursor: pointer; transition: all 0.25s; text-align: center; background: var(--cream); position: relative; }
   .payment-option:hover { border-color: var(--saffron-light); background: #fff8f3; }
@@ -257,25 +295,21 @@
   .success-msg { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; }
   .success-close { padding: 12px 32px; background: var(--saffron); color: white; border: none; border-radius: 100px; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
 
-  /* ── LANGUAGE SWITCHER ── */
   .lang-switcher { display: flex; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(212,160,23,0.25); border-radius: 100px; overflow: hidden; margin-left: 1rem; flex-shrink: 0; }
   .lang-btn { padding: 5px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; border: none; background: transparent; color: rgba(253,246,236,0.5); letter-spacing: 0.06em; transition: all 0.2s; text-transform: uppercase; }
   .lang-btn.active { background: var(--gold); color: var(--dark); border-radius: 100px; }
   .lang-btn:hover:not(.active) { color: var(--gold-light); }
 
-  /* ── i18n: default EN, hide FR strings ── */
   [data-lang="fr"] { display: none; }
-  /* when lang-fr class is on body, flip */
   body.lang-fr [data-lang="en"] { display: none; }
   body.lang-fr [data-lang="fr"] { display: revert; }
-  /* inline elements */
   span[data-lang], a[data-lang] { display: inline; }
   [data-lang="fr"]:is(span, a) { display: none; }
   body.lang-fr [data-lang="fr"]:is(span, a) { display: inline; }
   body.lang-fr [data-lang="en"]:is(span, a) { display: none; }
 
   @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 3rem; } .order-summary-panel { position: static; } }
-  @media (max-width: 768px) { nav { padding: 0 4%; } .nav-links { display: none; } .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(26,18,8,0.97); padding: 1.5rem 5%; gap: 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.08); } .hamburger { display: flex; } .nav-cta { display: none; } .hero-stats { gap: 2rem; bottom: 2rem; } .about-grid { grid-template-columns: 1fr; gap: 3rem; } .about-grid .about-visual { order: -1; } section { padding: 4rem 5%; } .payment-methods { grid-template-columns: 1fr 1fr; } .platforms-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 768px) { nav { padding: 0 4%; } .nav-links { display: none; } .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(26,18,8,0.97); padding: 1.5rem 5%; gap: 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.08); } .hamburger { display: flex; } .nav-cta { display: none; } .hero-stats { gap: 2rem; bottom: 2rem; } .about-grid { grid-template-columns: 1fr; gap: 3rem; } .about-grid .about-visual { order: -1; } section { padding: 4rem 5%; } .payment-methods { grid-template-columns: 1fr 1fr; } .platforms-grid { grid-template-columns: 1fr 1fr; } .delivery-input-row { flex-direction: column; } }
 </style>
 </head>
 <body>
@@ -283,7 +317,22 @@
 <!-- NAVBAR -->
 <nav id="navbar">
   <a class="nav-logo" href="#hero">
-    <div class="nav-logo-icon">🍛</div>
+    <!-- UNIQUE SVG LOGO — Palmier Tamil stylisé avec épice et flamme -->
+    <svg class="nav-logo-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="22" cy="22" r="21" fill="#1A1208" stroke="#D4A017" stroke-width="1.2"/>
+      <!-- Feuilles de palmier stylisées -->
+      <path d="M22 28 C18 20 10 16 8 10 C12 14 17 16 22 14" fill="#D4A017" opacity="0.9"/>
+      <path d="M22 28 C26 20 34 16 36 10 C32 14 27 16 22 14" fill="#E8641A" opacity="0.9"/>
+      <path d="M22 14 C20 8 14 4 12 2 C16 6 20 10 22 14" fill="#D4A017" opacity="0.6"/>
+      <path d="M22 14 C24 8 30 4 32 2 C28 6 24 10 22 14" fill="#E8641A" opacity="0.6"/>
+      <!-- Tronc -->
+      <path d="M20 28 Q22 22 24 28 L23.5 40 Q22 42 21 40 Z" fill="#D4A017" opacity="0.8"/>
+      <!-- Étoile épice au centre -->
+      <circle cx="22" cy="14" r="2.5" fill="#F0C84A"/>
+      <circle cx="22" cy="14" r="1.2" fill="#1A1208"/>
+      <!-- Lettres JS en bas -->
+      <text x="22" y="38" text-anchor="middle" font-family="serif" font-size="5" font-weight="700" fill="#F0C84A" letter-spacing="1">JS</text>
+    </svg>
     <span class="nav-logo-text">Jaffna <span>Samayal</span></span>
   </a>
   <ul class="nav-links" id="navLinks">
@@ -336,7 +385,7 @@
   </div>
   <div class="hero-stats">
     <div><div class="hero-stat-num" data-count="500">0</div><div class="hero-stat-label"><span data-lang="fr">Clients satisfaits</span><span data-lang="en">Happy customers</span></div></div>
-    <div><div class="hero-stat-num" data-count="30">0</div><div class="hero-stat-label"><span data-lang="fr">Plats au menu</span><span data-lang="en">Dishes on menu</span></div></div>
+    <div><div class="hero-stat-num" data-count="10">0</div><div class="hero-stat-label"><span data-lang="fr">Plats au menu</span><span data-lang="en">Dishes on menu</span></div></div>
     <div><div class="hero-stat-num">4.9★</div><div class="hero-stat-label"><span data-lang="fr">Note moyenne</span><span data-lang="en">Average rating</span></div></div>
   </div>
 </section>
@@ -346,13 +395,57 @@
   <div class="about-grid">
     <div class="about-visual reveal">
       <div class="about-img-frame">
-        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;opacity:0.9">
-          <circle cx="200" cy="260" r="160" fill="rgba(212,160,23,0.08)" stroke="rgba(212,160,23,0.2)" stroke-width="1"/>
-          <circle cx="200" cy="260" r="130" fill="rgba(232,100,26,0.06)" stroke="rgba(232,100,26,0.15)" stroke-width="1"/>
-          <ellipse cx="200" cy="295" rx="75" ry="20" fill="rgba(184,77,16,0.8)"/>
-          <rect x="125" y="200" width="150" height="95" rx="8" fill="rgba(184,77,16,0.9)"/>
-          <ellipse cx="200" cy="200" rx="75" ry="20" fill="rgba(232,100,26,0.9)"/>
-          <text x="200" y="460" text-anchor="middle" font-size="14" fill="rgba(212,160,23,0.5)" font-family="serif">ஜாஃப்னா சமையல்</text>
+        <!-- Illustration SVG authentique Jaffna Tamil -->
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <!-- Fond ambiance -->
+          <rect width="400" height="500" fill="#1A0A02"/>
+          <!-- Feuilles de bananier décoratives -->
+          <ellipse cx="60" cy="100" rx="45" ry="12" fill="#1e4a1e" transform="rotate(-30 60 100)"/>
+          <ellipse cx="340" cy="120" rx="45" ry="12" fill="#1e4a1e" transform="rotate(30 340 120)"/>
+          <ellipse cx="40" cy="380" rx="40" ry="10" fill="#1e4a1e" transform="rotate(-20 40 380)"/>
+          <ellipse cx="360" cy="360" rx="40" ry="10" fill="#1e4a1e" transform="rotate(20 360 360)"/>
+          <!-- Assiette principale - banana leaf style -->
+          <ellipse cx="200" cy="310" rx="160" ry="45" fill="#1e4a1e" opacity="0.9"/>
+          <ellipse cx="200" cy="305" rx="155" ry="42" fill="#2d6b2d" opacity="0.8"/>
+          <!-- Riz au centre -->
+          <ellipse cx="200" cy="295" rx="60" ry="30" fill="#f5e6c8"/>
+          <ellipse cx="200" cy="290" rx="58" ry="28" fill="#fff8ec"/>
+          <!-- Petits grains de riz -->
+          <g fill="#e8d5a0" opacity="0.6">
+            <ellipse cx="185" cy="288" rx="3" ry="1.5" transform="rotate(20 185 288)"/>
+            <ellipse cx="195" cy="283" rx="3" ry="1.5" transform="rotate(-10 195 283)"/>
+            <ellipse cx="208" cy="286" rx="3" ry="1.5" transform="rotate(35 208 286)"/>
+            <ellipse cx="200" cy="295" rx="3" ry="1.5"/>
+            <ellipse cx="192" cy="298" rx="3" ry="1.5" transform="rotate(15 192 298)"/>
+            <ellipse cx="212" cy="293" rx="3" ry="1.5" transform="rotate(-25 212 293)"/>
+          </g>
+          <!-- Curry rouge (Beef/Mutton) -->
+          <ellipse cx="130" cy="300" rx="38" ry="22" fill="#8B1A00" opacity="0.95"/>
+          <ellipse cx="130" cy="296" rx="35" ry="20" fill="#C0392B" opacity="0.9"/>
+          <circle cx="123" cy="294" r="4" fill="#8B1A00" opacity="0.6"/>
+          <circle cx="135" cy="298" r="3" fill="#8B1A00" opacity="0.6"/>
+          <!-- Curry coco (Chicken) -->
+          <ellipse cx="270" cy="300" rx="38" ry="22" fill="#5C3A00" opacity="0.95"/>
+          <ellipse cx="270" cy="296" rx="35" ry="20" fill="#D4851A" opacity="0.9"/>
+          <circle cx="263" cy="293" r="3.5" fill="#5C3A00" opacity="0.6"/>
+          <!-- Dhal curry -->
+          <ellipse cx="160" cy="325" rx="30" ry="16" fill="#7A5C00" opacity="0.9"/>
+          <ellipse cx="160" cy="322" rx="27" ry="14" fill="#D4A017" opacity="0.85"/>
+          <!-- Chutney vert -->
+          <ellipse cx="240" cy="322" rx="22" ry="12" fill="#1e6b1e" opacity="0.9"/>
+          <ellipse cx="240" cy="320" rx="20" ry="10" fill="#2d9b2d" opacity="0.8"/>
+          <!-- Papadum croustillant -->
+          <ellipse cx="200" cy="350" rx="70" ry="12" fill="#C8A04A" opacity="0.4"/>
+          <!-- Épices déco -->
+          <circle cx="310" cy="260" r="4" fill="#D4A017" opacity="0.6"/>
+          <circle cx="90" cy="255" r="3" fill="#E8641A" opacity="0.5"/>
+          <circle cx="320" cy="345" r="3" fill="#D4A017" opacity="0.4"/>
+          <!-- Flamme / chaleur -->
+          <path d="M195 170 Q200 150 205 170 Q210 155 208 175 Q200 185 192 175 Q190 155 195 170Z" fill="#E8641A" opacity="0.6"/>
+          <path d="M198 175 Q200 162 202 175 Q203 167 201 178 Q200 182 199 178 Q197 167 198 175Z" fill="#F0C84A" opacity="0.8"/>
+          <!-- Titre Tamil -->
+          <text x="200" y="440" text-anchor="middle" font-size="18" fill="#D4A017" font-family="serif" opacity="0.85">ஜாஃப்னா சமையல்</text>
+          <text x="200" y="465" text-anchor="middle" font-size="11" fill="rgba(212,160,23,0.4)" font-family="serif" letter-spacing="3">JAFFNA SAMAYAL</text>
         </svg>
       </div>
       <div class="about-badge-float">
@@ -363,7 +456,7 @@
     <div class="about-text reveal reveal-delay-1">
       <span class="section-label"><span data-lang="fr">Notre histoire</span><span data-lang="en">Our Story</span></span>
       <h2 class="section-title"><span data-lang="fr">Les saveurs de Jaffna, préservées avec amour</span><span data-lang="en">The flavours of Jaffna, preserved with love</span></h2>
-      <p class="section-desc" data-lang="fr">Née à Jaffna, au nord de Sri Lanka, notre cuisine est le reflet d'une tradition culinaire tamoule millénaire. Chaque plat est préparé avec les épices sélectionnées, les recettes de famille, et surtout, tout l'amour d'une cuisine faite maison.</p>
+      <p class="section-desc" data-lang="fr">Née à Jaffna, au nord de Sri Lanka, notre cuisine est le reflet d'une tradition culinaire tamoule millénaire. Chaque plat est préparé avec des épices sélectionnées, les recettes de famille, et tout l'amour d'une cuisine faite maison.</p>
       <p class="section-desc" data-lang="en">Born in Jaffna, northern Sri Lanka, our cooking reflects a thousand-year-old Tamil culinary tradition. Every dish is made with hand-picked spices, family recipes, and above all, the love of home cooking.</p>
       <p class="section-desc" style="margin-top:1rem" data-lang="fr">Nous vous apportons l'authenticité des saveurs sri-lankaises directement à votre porte, partout en France.</p>
       <p class="section-desc" style="margin-top:1rem" data-lang="en">We bring the authenticity of Sri Lankan flavours directly to your door, anywhere in France.</p>
@@ -420,20 +513,20 @@
   <div class="testimonials-scroll">
     <div class="testimonial-card reveal reveal-delay-1">
       <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text" data-lang="fr">"Un vrai voyage culinaire ! Le Mutton Curry était exactement comme celui que je mangeais chez ma grand-mère à Jaffna. Impossible de trouver ça ailleurs en France."</p>
-      <p class="testimonial-text" data-lang="en">"A true culinary journey! The Mutton Curry was exactly like the one I used to eat at my grandmother's in Jaffna. Impossible to find elsewhere in France."</p>
+      <p class="testimonial-text" data-lang="fr">"Un vrai voyage culinaire ! Le Beef Curry était exactement comme celui que je mangeais chez ma grand-mère à Jaffna. Impossible de trouver ça ailleurs en France."</p>
+      <p class="testimonial-text" data-lang="en">"A true culinary journey! The Beef Curry was exactly like the one I used to eat at my grandmother's in Jaffna. Impossible to find elsewhere in France."</p>
       <div class="testimonial-author"><div class="testimonial-avatar">🧑</div><div><div class="testimonial-name">Suresh K.</div><div class="testimonial-location">Paris, Île-de-France</div></div></div>
     </div>
     <div class="testimonial-card reveal reveal-delay-2">
       <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text" data-lang="fr">"J'ai découvert la cuisine tamoule grâce à Jaffna Samayal. Les Kothu Roti et le Dhal Curry sont devenus mes plats favoris. La livraison est rapide et soignée."</p>
-      <p class="testimonial-text" data-lang="en">"I discovered Tamil cuisine thanks to Jaffna Samayal. Kothu Roti and Dhal Curry have become my favourite dishes. Delivery is fast and careful."</p>
+      <p class="testimonial-text" data-lang="fr">"Le Chicken Biryani est incroyable, les épices sont parfaitement dosées. La livraison est rapide et le prix est très honnête pour une qualité pareille."</p>
+      <p class="testimonial-text" data-lang="en">"The Chicken Biryani is incredible, the spices are perfectly balanced. Delivery is fast and the price is very fair for this quality."</p>
       <div class="testimonial-author"><div class="testimonial-avatar">👩</div><div><div class="testimonial-name">Marie-Claire D.</div><div class="testimonial-location">Lyon, Auvergne-Rhône-Alpes</div></div></div>
     </div>
     <div class="testimonial-card reveal reveal-delay-3">
       <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text" data-lang="fr">"Les samosas et les Vadai sont parfaits pour l'apéro ! Tout est frais, bien épicé sans être excessif. Je commande maintenant toutes les semaines."</p>
-      <p class="testimonial-text" data-lang="en">"The samosas and Vadai are perfect for starters! Everything is fresh, well-spiced without being excessive. I order every week now."</p>
+      <p class="testimonial-text" data-lang="fr">"Les Prawns curry sont divins ! Tout est frais, bien épicé. Le compteur de livraison est super pratique, on sait exactement combien ça coûte. Je commande toutes les semaines."</p>
+      <p class="testimonial-text" data-lang="en">"The Prawn curry is divine! Everything is fresh and well spiced. The delivery calculator is super handy — you know exactly what it'll cost. I order every week."</p>
       <div class="testimonial-author"><div class="testimonial-avatar">🧔</div><div><div class="testimonial-name">Antoine B.</div><div class="testimonial-location">Marseille, PACA</div></div></div>
     </div>
   </div>
@@ -444,9 +537,69 @@
   <div class="reveal">
     <span class="section-label"><span data-lang="fr">Livraison</span><span data-lang="en">Delivery</span></span>
     <h2 class="section-title"><span data-lang="fr">Livré partout en France</span><span data-lang="en">Delivered across France</span></h2>
-    <p class="section-desc" data-lang="fr">Nous livrons dans toute la France métropolitaine. Délai de commande : 48h minimum à l'avance.</p>
-    <p class="section-desc" data-lang="en">We deliver across mainland France. Orders must be placed at least 48h in advance.</p>
+    <p class="section-desc" data-lang="fr">Nous livrons dans toute la France métropolitaine. Délai de commande : 48h minimum à l'avance. Le prix de livraison s'ajuste en fonction de votre distance.</p>
+    <p class="section-desc" data-lang="en">We deliver across mainland France. Orders must be placed at least 48h in advance. Delivery price adjusts based on your distance.</p>
   </div>
+
+  <!-- DELIVERY CALCULATOR -->
+  <div class="delivery-calc reveal">
+    <div class="delivery-calc-title">📍 <span data-lang="fr">Calculer ma livraison</span><span data-lang="en">Calculate my delivery</span></div>
+    <div class="delivery-calc-sub" data-lang="fr">Entrez votre adresse pour connaître le coût de livraison exact</div>
+    <div class="delivery-calc-sub" data-lang="en">Enter your address to get the exact delivery cost</div>
+    <div class="delivery-input-row">
+      <input type="text" id="calcAddress" placeholder="Ex : 12 rue de la Paix, 75001 Paris" />
+      <button class="delivery-calc-btn" onclick="calcDelivery()">
+        <span data-lang="fr">Calculer →</span><span data-lang="en">Calculate →</span>
+      </button>
+    </div>
+    <div class="delivery-loading" id="calcLoading">
+      <div class="delivery-spinner"></div>
+      <span data-lang="fr">Calcul en cours...</span><span data-lang="en">Calculating...</span>
+    </div>
+    <div class="delivery-error" id="calcError"></div>
+    <div class="delivery-result" id="calcResult">
+      <div class="delivery-result-row">
+        <span class="delivery-result-label" data-lang="fr">Votre adresse</span>
+        <span class="delivery-result-label" data-lang="en">Your address</span>
+        <span class="delivery-result-val" id="resultAddr" style="text-align:right;max-width:60%;font-size:0.82rem"></span>
+      </div>
+      <div class="delivery-result-row">
+        <span class="delivery-result-label" data-lang="fr">Distance estimée</span>
+        <span class="delivery-result-label" data-lang="en">Estimated distance</span>
+        <span class="delivery-result-val" id="resultDist"></span>
+      </div>
+      <div class="delivery-result-row">
+        <span class="delivery-result-label" data-lang="fr">Frais de livraison</span>
+        <span class="delivery-result-label" data-lang="en">Delivery fee</span>
+        <span class="delivery-result-val" id="resultFee"></span>
+      </div>
+      <div class="delivery-result-row" id="resultFreeRow" style="display:none">
+        <span class="delivery-result-label" data-lang="fr">🎉 Livraison offerte dès 60€</span>
+        <span class="delivery-result-label" data-lang="en">🎉 Free from 60€ order</span>
+        <span class="delivery-result-val" style="color:#6ee7b7">–</span>
+      </div>
+    </div>
+    <!-- Tableau des tarifs -->
+    <table class="pricing-table" style="margin-top:1.5rem">
+      <thead>
+        <tr>
+          <th data-lang="fr">Distance</th><th data-lang="fr">Frais livraison</th>
+          <th data-lang="en" style="display:none">Distance</th><th data-lang="en" style="display:none">Delivery fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>0 – 2 km</td><td class="free-tag" data-lang="fr">Gratuit</td><td class="free-tag" data-lang="en" style="display:none">Free</td></tr>
+        <tr><td>2 – 5 km</td><td>1,99 €</td></tr>
+        <tr><td>5 – 10 km</td><td>3,49 €</td></tr>
+        <tr><td>10 – 20 km</td><td>5,99 €</td></tr>
+        <tr><td>20 – 50 km</td><td>9,99 €</td></tr>
+        <tr><td>50 – 100 km</td><td>14,99 €</td></tr>
+        <tr><td>> 100 km</td><td>19,99 € <span data-lang="fr">(Colissimo)</span><span data-lang="en" style="display:none">(Colissimo)</span></td></tr>
+        <tr><td colspan="2"><span class="free-tag" data-lang="fr">🎁 Offert dès 60€ de commande (< 20 km)</span><span class="free-tag" data-lang="en" style="display:none">🎁 Free on 60€+ orders (< 20 km)</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="delivery-zones reveal">
     <span class="zone-pill highlight">🗼 Paris & IDF</span>
     <span class="zone-pill">Lyon</span><span class="zone-pill">Marseille</span>
@@ -460,7 +613,7 @@
     <div class="delivery-info-card"><div class="delivery-info-icon">⏱</div><div class="delivery-info-title"><span data-lang="fr">Commande 48h avant</span><span data-lang="en">Order 48h ahead</span></div><div class="delivery-info-val"><span data-lang="fr">Préparation fraîche le jour J</span><span data-lang="en">Fresh prep on the day</span></div></div>
     <div class="delivery-info-card"><div class="delivery-info-icon">📦</div><div class="delivery-info-title"><span data-lang="fr">Emballage isotherme</span><span data-lang="en">Insulated packaging</span></div><div class="delivery-info-val"><span data-lang="fr">Plats frais et bien conservés</span><span data-lang="en">Meals stay fresh in transit</span></div></div>
     <div class="delivery-info-card"><div class="delivery-info-icon">🚚</div><div class="delivery-info-title">Colissimo / Chronopost</div><div class="delivery-info-val"><span data-lang="fr">Suivi de colis en temps réel</span><span data-lang="en">Real-time parcel tracking</span></div></div>
-    <div class="delivery-info-card"><div class="delivery-info-icon">💰</div><div class="delivery-info-title"><span data-lang="fr">Livraison offerte</span><span data-lang="en">Free delivery</span></div><div class="delivery-info-val"><span data-lang="fr">Dès 60€ de commande</span><span data-lang="en">On orders over €60</span></div></div>
+    <div class="delivery-info-card"><div class="delivery-info-icon">💰</div><div class="delivery-info-title"><span data-lang="fr">Livraison offerte</span><span data-lang="en">Free delivery</span></div><div class="delivery-info-val"><span data-lang="fr">Dès 60€ (< 20 km)</span><span data-lang="en">On orders over €60 (< 20 km)</span></div></div>
   </div>
 </section>
 
@@ -521,7 +674,11 @@
           </div>
           <div class="form-group">
             <label><span data-lang="fr">Adresse de livraison *</span><span data-lang="en">Delivery address *</span></label>
-            <input type="text" id="f-address" placeholder="12 rue de la Paix, 75001 Paris" required>
+            <div class="address-with-calc">
+              <input type="text" id="f-address" placeholder="12 rue de la Paix, 75001 Paris" required style="padding-right:110px" oninput="onAddressInput()">
+              <span class="address-calc-badge" onclick="calcDeliveryFromForm()">📍 <span data-lang="fr">Calculer</span><span data-lang="en">Calculate</span></span>
+            </div>
+            <div class="inline-delivery-info" id="formDeliveryInfo"></div>
           </div>
           <div class="form-group">
             <label><span data-lang="fr">Date de livraison souhaitée *</span><span data-lang="en">Desired delivery date *</span></label>
@@ -538,13 +695,13 @@
                 <div class="check-badge">✓</div>
                 <div class="payment-option-icon">💳</div>
                 <div class="payment-option-title"><span data-lang="fr">Carte bancaire</span><span data-lang="en">Credit card</span></div>
-                <div class="payment-option-sub"><span data-lang="fr">Paiement sécurisé en ligne<br>Stripe · 3D Secure</span><span data-lang="en">Secure online payment<br>Stripe · 3D Secure</span></div>
+                <div class="payment-option-sub"><span data-lang="fr">Paiement sécurisé<br>Stripe · 3D Secure</span><span data-lang="en">Secure payment<br>Stripe · 3D Secure</span></div>
               </div>
               <div class="payment-option" id="opt-cash" onclick="selectPayment('cash')">
                 <div class="check-badge">✓</div>
                 <div class="payment-option-icon">💵</div>
                 <div class="payment-option-title"><span data-lang="fr">Espèces</span><span data-lang="en">Cash</span></div>
-                <div class="payment-option-sub"><span data-lang="fr">À la livraison<br>Monnaie exacte si possible</span><span data-lang="en">On delivery<br>Exact change if possible</span></div>
+                <div class="payment-option-sub"><span data-lang="fr">À la livraison<br>Monnaie exacte svp</span><span data-lang="en">On delivery<br>Exact change please</span></div>
               </div>
             </div>
           </div>
@@ -585,7 +742,20 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Jaffna <span>Samayal</span></div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:0.5rem">
+    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px">
+      <circle cx="22" cy="22" r="21" fill="#2D1F0A" stroke="#D4A017" stroke-width="1"/>
+      <path d="M22 28 C18 20 10 16 8 10 C12 14 17 16 22 14" fill="#D4A017" opacity="0.9"/>
+      <path d="M22 28 C26 20 34 16 36 10 C32 14 27 16 22 14" fill="#E8641A" opacity="0.9"/>
+      <path d="M22 14 C20 8 14 4 12 2 C16 6 20 10 22 14" fill="#D4A017" opacity="0.6"/>
+      <path d="M22 14 C24 8 30 4 32 2 C28 6 24 10 22 14" fill="#E8641A" opacity="0.6"/>
+      <path d="M20 28 Q22 22 24 28 L23.5 40 Q22 42 21 40 Z" fill="#D4A017" opacity="0.8"/>
+      <circle cx="22" cy="14" r="2.5" fill="#F0C84A"/>
+      <circle cx="22" cy="14" r="1.2" fill="#1A1208"/>
+      <text x="22" y="38" text-anchor="middle" font-family="serif" font-size="5" font-weight="700" fill="#F0C84A" letter-spacing="1">JS</text>
+    </svg>
+    <div class="footer-logo" style="margin-bottom:0">Jaffna <span>Samayal</span></div>
+  </div>
   <p class="footer-tagline">ஜாஃப்னா சமையல் — <span data-lang="fr">L'authenticité tamoule dans chaque plat</span><span data-lang="en">Authentic Tamil flavours in every dish</span></p>
   <ul class="footer-links">
     <li><a href="#about"><span data-lang="fr">Notre histoire</span><span data-lang="en">Our Story</span></a></li>
@@ -615,27 +785,24 @@
 </div>
 
 <script>
-/* ══════════════════════════════════════
-   LANGUAGE — default EN
-══════════════════════════════════════ */
+/* ══════ LANGUAGE ══════ */
 let currentLang = 'en';
-
 function setLang(lang) {
   currentLang = lang;
-  if (lang === 'fr') {
-    document.body.classList.add('lang-fr');
-  } else {
-    document.body.classList.remove('lang-fr');
-  }
+  if (lang === 'fr') document.body.classList.add('lang-fr');
+  else document.body.classList.remove('lang-fr');
   document.getElementById('btnFR').classList.toggle('active', lang === 'fr');
   document.getElementById('btnEN').classList.toggle('active', lang === 'en');
-  // Re-render cart (empty message uses data-lang)
+  // Sync pricing table lang visibility
+  document.querySelectorAll('.pricing-table [data-lang]').forEach(el => {
+    if (el.getAttribute('data-lang') === lang) el.style.display = '';
+    else el.style.display = 'none';
+  });
   renderCart();
+  renderMenu(currentMenuFilter);
 }
 
-/* ══════════════════════════════════════
-   CONFIG
-══════════════════════════════════════ */
+/* ══════ CONFIG ══════ */
 const CONFIG = {
   emailjs_public_key: 'VOTRE_CLE_PUBLIQUE_EMAILJS',
   emailjs_service_id: 'VOTRE_SERVICE_ID',
@@ -643,40 +810,199 @@ const CONFIG = {
   stripe_public_key: 'pk_test_VOTRE_CLE_STRIPE_ICI',
   whatsapp_number: '33600000000',
   free_delivery_threshold: 60,
+  // Restaurant location — Île-de-France (à changer selon votre vraie adresse)
+  restaurant_lat: 48.8566,
+  restaurant_lng: 2.3522,
 };
 
-/* ══════════════════════════════════════
-   MENU DATA
-══════════════════════════════════════ */
-const dishes = [
-  { id:1,  name:'Mutton Curry',         cat:'plat',    price:14, desc_fr:'Agneau mijoté aux épices de Jaffna, curcuma, coriandre et feuilles de curry.', desc_en:'Slow-cooked lamb with Jaffna spices, turmeric, coriander and curry leaves.', emoji:'🍛', spice:'🌶🌶🌶', isNew:false },
-  { id:2,  name:'Chicken Curry',        cat:'plat',    price:12, desc_fr:'Poulet tendre en sauce coco-tamarin, épices douces, parfait pour tous.', desc_en:'Tender chicken in coconut-tamarind sauce, mild spices, perfect for everyone.', emoji:'🍲', spice:'🌶🌶', isNew:false },
-  { id:3,  name:'Kothu Roti',           cat:'plat',    price:11, desc_fr:'Roti haché sauté aux légumes, œuf et épices — le street food de Jaffna.', desc_en:'Chopped roti stir-fried with vegetables, egg and spices — Jaffna street food.', emoji:'🥘', spice:'🌶🌶', isNew:true  },
-  { id:4,  name:'Dhal Curry',           cat:'riz',     price:9,  desc_fr:'Lentilles crémeuses au lait de coco, curcuma et moutarde. 100% végétarien.', desc_en:'Creamy lentils with coconut milk, turmeric and mustard. 100% vegetarian.', emoji:'🫘', spice:'🌶', isNew:false },
-  { id:5,  name:'Rice & Curry complet', cat:'riz',     price:13, desc_fr:'Riz vapeur avec 3 curries au choix + papadum croustillant.', desc_en:'Steamed rice with 3 curries of your choice + crispy papadum.', emoji:'🍚', spice:'🌶🌶', isNew:false },
-  { id:6,  name:'Biryani Jaffna',       cat:'riz',     price:14, desc_fr:'Riz basmati parfumé, viande marinée aux épices de Jaffna, raita maison.', desc_en:'Fragrant basmati rice, meat marinated in Jaffna spices, homemade raita.', emoji:'🥗', spice:'🌶🌶', isNew:true  },
-  { id:7,  name:'Samosas (×4)',          cat:'snack',   price:7,  desc_fr:'Feuilles croustillantes farcies de pommes de terre épicées ou viande hachée.', desc_en:'Crispy pastry filled with spiced potatoes or minced meat.', emoji:'🥟', spice:'🌶', isNew:false },
-  { id:8,  name:'Vadai (×4)',            cat:'snack',   price:7,  desc_fr:'Beignets de lentilles, croustillants dehors, moelleux dedans. Avec chutney.', desc_en:'Lentil fritters, crispy outside, soft inside. Served with chutney.', emoji:'🫔', spice:'🌶', isNew:false },
-  { id:9,  name:'Murukku (×6)',          cat:'snack',   price:5,  desc_fr:'Chips de riz soufflées aux épices, à grignoter à tout moment.', desc_en:'Spiced puffed rice chips, perfect for snacking any time.', emoji:'🥨', spice:'🌶', isNew:false },
-  { id:10, name:'Payasam',              cat:'dessert', price:6,  desc_fr:'Riz au lait parfumé à la cardamome, lait de coco et sucre de palme.', desc_en:'Rice pudding flavoured with cardamom, coconut milk and palm sugar.', emoji:'🍮', spice:'', isNew:false },
-  { id:11, name:'Ladoo (×3)',            cat:'dessert', price:5,  desc_fr:'Boules sucrées à la farine de pois chiches, ghee et cardamome.', desc_en:'Sweet chickpea flour balls with ghee and cardamom.', emoji:'🟡', spice:'', isNew:false },
+/* ══════ DELIVERY PRICING ══════ */
+const DELIVERY_TIERS = [
+  { max: 2,    fee: 0,     label_fr: 'Gratuit', label_en: 'Free' },
+  { max: 5,    fee: 1.99,  label_fr: '1,99 €',  label_en: '€1.99' },
+  { max: 10,   fee: 3.49,  label_fr: '3,49 €',  label_en: '€3.49' },
+  { max: 20,   fee: 5.99,  label_fr: '5,99 €',  label_en: '€5.99' },
+  { max: 50,   fee: 9.99,  label_fr: '9,99 €',  label_en: '€9.99' },
+  { max: 100,  fee: 14.99, label_fr: '14,99 €', label_en: '€14.99' },
+  { max: 99999,fee: 19.99, label_fr: '19,99 € (Colissimo)', label_en: '€19.99 (Colissimo)' },
 ];
 
-/* ══════════════════════════════════════
-   CART
-══════════════════════════════════════ */
+function getDeliveryFee(km, cartSubtotal) {
+  for (const tier of DELIVERY_TIERS) {
+    if (km <= tier.max) {
+      if (cartSubtotal >= CONFIG.free_delivery_threshold && km <= 20) return { fee: 0, isFree: true };
+      return { fee: tier.fee, isFree: false, label_fr: tier.label_fr, label_en: tier.label_en };
+    }
+  }
+  return { fee: 19.99, isFree: false };
+}
+
+/* Geocoding via Nominatim (OSM) — free, no API key needed */
+async function geocodeAddress(address) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&countrycodes=fr&limit=1`;
+  const res = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
+  const data = await res.json();
+  if (!data || data.length === 0) throw new Error('Adresse introuvable');
+  return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon), display: data[0].display_name };
+}
+
+/* Haversine distance km */
+function haversine(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+let cachedDeliveryKm = null;
+let calcDebounceTimer = null;
+
+async function calcDelivery() {
+  const addr = document.getElementById('calcAddress').value.trim();
+  if (!addr) return;
+  const loading = document.getElementById('calcLoading');
+  const result  = document.getElementById('calcResult');
+  const error   = document.getElementById('calcError');
+  loading.classList.add('show');
+  result.classList.remove('show');
+  error.classList.remove('show');
+  try {
+    const geo = await geocodeAddress(addr);
+    const km = haversine(CONFIG.restaurant_lat, CONFIG.restaurant_lng, geo.lat, geo.lng);
+    const info = getDeliveryFee(km, 0);
+    document.getElementById('resultAddr').textContent = geo.display.split(',').slice(0,3).join(',');
+    document.getElementById('resultDist').textContent = km.toFixed(1) + ' km';
+    document.getElementById('resultFee').textContent = info.isFree
+      ? (currentLang === 'fr' ? '🎉 Gratuit' : '🎉 Free')
+      : (currentLang === 'fr' ? info.label_fr : info.label_en) || (info.fee === 0 ? (currentLang === 'fr' ? 'Gratuit' : 'Free') : '€' + info.fee.toFixed(2));
+    document.getElementById('resultFreeRow').style.display = km <= 20 ? 'flex' : 'none';
+    result.classList.add('show');
+  } catch(e) {
+    error.textContent = currentLang === 'fr' ? '⚠️ Adresse introuvable. Essayez avec code postal + ville.' : '⚠️ Address not found. Try with postcode + city.';
+    error.classList.add('show');
+  }
+  loading.classList.remove('show');
+}
+
+async function calcDeliveryFromForm() {
+  const addr = document.getElementById('f-address').value.trim();
+  if (!addr || addr.length < 5) return;
+  const infoEl = document.getElementById('formDeliveryInfo');
+  infoEl.classList.remove('show');
+  infoEl.textContent = currentLang === 'fr' ? '⏳ Calcul en cours...' : '⏳ Calculating...';
+  infoEl.classList.add('show');
+  try {
+    const geo = await geocodeAddress(addr);
+    const km = haversine(CONFIG.restaurant_lat, CONFIG.restaurant_lng, geo.lat, geo.lng);
+    cachedDeliveryKm = km;
+    const subtotal = cartTotal();
+    const info = getDeliveryFee(km, subtotal);
+    let feeStr;
+    if (info.isFree || info.fee === 0) {
+      feeStr = currentLang === 'fr' ? '🎉 Livraison gratuite !' : '🎉 Free delivery!';
+    } else {
+      feeStr = currentLang === 'fr' ? `Livraison : ${info.label_fr}` : `Delivery: ${info.label_en}`;
+    }
+    infoEl.innerHTML = `📍 ${km.toFixed(1)} km — ${feeStr}`;
+    renderCart();
+  } catch(e) {
+    infoEl.textContent = currentLang === 'fr' ? '⚠️ Adresse introuvable.' : '⚠️ Address not found.';
+  }
+}
+
+function onAddressInput() {
+  cachedDeliveryKm = null;
+  document.getElementById('formDeliveryInfo').classList.remove('show');
+}
+
+/* ══════ MENU DATA — with Unsplash food photos ══════ */
+const dishes = [
+  {
+    id: 1, name: 'Beef Curry', cat: 'plat', price: 6.99,
+    desc_fr: 'Bœuf mijoté longuement aux épices tamoules — curcuma, cumin, piment et feuilles de curry sur lit de riz.',
+    desc_en: 'Slow-cooked beef in Tamil spices — turmeric, cumin, chilli and curry leaves over rice.',
+    img: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80',
+    spice: '🌶🌶🌶', isNew: false
+  },
+  {
+    id: 2, name: 'Prawns Curry', cat: 'plat', price: 6.99,
+    desc_fr: 'Crevettes fraîches en sauce coco-tamarin, ail, gingembre et épices de Jaffna. Saveur de la mer.',
+    desc_en: 'Fresh prawns in coconut-tamarind sauce with garlic, ginger and Jaffna spices. Taste of the sea.',
+    img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80',
+    spice: '🌶🌶', isNew: true
+  },
+  {
+    id: 3, name: 'Chicken Curry', cat: 'plat', price: 6.99,
+    desc_fr: 'Poulet tendre en sauce coco-tamarin, épices douces. Parfait pour toute la famille.',
+    desc_en: 'Tender chicken in coconut-tamarind sauce with mild spices. Perfect for the whole family.',
+    img: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80',
+    spice: '🌶🌶', isNew: false
+  },
+  {
+    id: 4, name: 'Chicken Biryani', cat: 'riz', price: 6.99,
+    desc_fr: 'Riz basmati parfumé au safran, poulet mariné aux épices de Jaffna, raita maison et oignons frits.',
+    desc_en: 'Saffron-fragrant basmati rice, chicken marinated in Jaffna spices, homemade raita and fried onions.',
+    img: 'https://images.unsplash.com/photo-1563379091339-03246963d7fd?w=600&q=80',
+    spice: '🌶🌶', isNew: true
+  },
+  {
+    id: 5, name: 'Crab Curry', cat: 'plat', price: 6.99,
+    desc_fr: 'Crabe entier en sauce piquante de Jaffna, piment, lait de coco et épices fraîches. Plat roi du Sri Lanka.',
+    desc_en: 'Whole crab in fiery Jaffna sauce, chilli, coconut milk and fresh spices. The king dish of Sri Lanka.',
+    img: 'https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&q=80',
+    spice: '🌶🌶🌶', isNew: false
+  },
+  {
+    id: 6, name: 'Dhal Curry', cat: 'riz', price: 6.99,
+    desc_fr: 'Lentilles crémeuses au lait de coco, curcuma et moutarde. 100% végétarien, riche en protéines.',
+    desc_en: 'Creamy lentils with coconut milk, turmeric and mustard. 100% vegetarian, rich in protein.',
+    img: 'https://images.unsplash.com/photo-1546549032-9571cd6b27df?w=600&q=80',
+    spice: '🌶', isNew: false
+  },
+  {
+    id: 7, name: 'Rice & Curry complet', cat: 'riz', price: 6.99,
+    desc_fr: 'Riz vapeur avec 3 curries au choix + papadum croustillant. Le repas traditionnel tamoul complet.',
+    desc_en: 'Steamed rice with 3 curries of your choice + crispy papadum. The complete traditional Tamil meal.',
+    img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&q=80',
+    spice: '🌶🌶', isNew: false
+  },
+  {
+    id: 8, name: 'Samosas (×4)', cat: 'snack', price: 6.99,
+    desc_fr: 'Feuilles croustillantes farcies de pommes de terre épicées ou viande hachée. Avec chutney maison.',
+    desc_en: 'Crispy pastry filled with spiced potatoes or minced meat. With homemade chutney.',
+    img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80',
+    spice: '🌶', isNew: false
+  },
+  {
+    id: 9, name: 'Vadai (×4)', cat: 'snack', price: 6.99,
+    desc_fr: 'Beignets de lentilles, croustillants dehors, moelleux dedans. Servis avec chutney coco et tamarin.',
+    desc_en: 'Lentil fritters, crispy outside, soft inside. Served with coconut and tamarind chutney.',
+    img: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&q=80',
+    spice: '🌶', isNew: false
+  },
+  {
+    id: 10, name: 'Payasam', cat: 'dessert', price: 6.99,
+    desc_fr: 'Riz au lait parfumé à la cardamome, lait de coco et sucre de palme. Douceur tamoule traditionnelle.',
+    desc_en: 'Rice pudding with cardamom, coconut milk and palm sugar. A traditional Tamil sweet.',
+    img: 'https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=600&q=80',
+    spice: '', isNew: false
+  },
+];
+
+/* ══════ CART ══════ */
 let cartItems = {};
 let paymentMethod = null;
 let stripeCardElement = null;
 let stripeInstance = null;
+let currentMenuFilter = 'all';
 
 function getCartDishes() {
   return Object.entries(cartItems)
     .filter(([,qty]) => qty > 0)
     .map(([id, qty]) => ({ dish: dishes.find(d => d.id === parseInt(id)), qty }));
 }
-function cartTotal() { return getCartDishes().reduce((sum, {dish, qty}) => sum + dish.price * qty, 0); }
-function cartCount() { return Object.values(cartItems).reduce((a, b) => a + b, 0); }
+function cartTotal() { return getCartDishes().reduce((s, {dish,qty}) => s + dish.price * qty, 0); }
+function cartCount() { return Object.values(cartItems).reduce((a,b) => a+b, 0); }
 
 function renderCart() {
   const list = document.getElementById('cartList');
@@ -699,7 +1025,7 @@ function renderCart() {
   list.innerHTML = items.map(({dish, qty}) => `
     <div class="cart-item">
       <div class="cart-item-left">
-        <span class="cart-item-emoji">${dish.emoji}</span>
+        <span class="cart-item-emoji">🍛</span>
         <div>
           <div class="cart-item-name">${dish.name}</div>
           <div class="cart-item-qty-row">
@@ -709,17 +1035,34 @@ function renderCart() {
           </div>
         </div>
       </div>
-      <span class="cart-item-price">${dish.price * qty}€</span>
+      <span class="cart-item-price">${(dish.price * qty).toFixed(2)}€</span>
       <button class="cart-item-remove" onclick="removeItem(${dish.id})">✕</button>
     </div>
   `).join('');
 
   document.getElementById('cartTotals').style.display = 'block';
-  document.getElementById('subtotalVal').textContent = total + '€';
-  document.getElementById('totalVal').textContent = total + '€';
-  const isFree = total >= CONFIG.free_delivery_threshold;
-  document.getElementById('freeDeliveryRow').style.display = isFree ? 'flex' : 'none';
-  document.getElementById('deliveryRow').style.display = isFree ? 'none' : 'flex';
+  document.getElementById('subtotalVal').textContent = total.toFixed(2) + '€';
+
+  // Delivery fee
+  if (cachedDeliveryKm !== null) {
+    const info = getDeliveryFee(cachedDeliveryKm, total);
+    if (info.isFree || info.fee === 0) {
+      document.getElementById('freeDeliveryRow').style.display = 'flex';
+      document.getElementById('deliveryRow').style.display = 'none';
+      document.getElementById('totalVal').textContent = total.toFixed(2) + '€';
+    } else {
+      document.getElementById('freeDeliveryRow').style.display = 'none';
+      document.getElementById('deliveryRow').style.display = 'flex';
+      document.getElementById('deliveryVal').textContent = '+ ' + info.fee.toFixed(2) + '€';
+      document.getElementById('totalVal').textContent = (total + info.fee).toFixed(2) + '€';
+    }
+  } else {
+    const isFree = total >= CONFIG.free_delivery_threshold;
+    document.getElementById('freeDeliveryRow').style.display = isFree ? 'flex' : 'none';
+    document.getElementById('deliveryRow').style.display = isFree ? 'none' : 'flex';
+    document.getElementById('deliveryVal').textContent = lang === 'fr' ? 'à définir' : 'TBD';
+    document.getElementById('totalVal').textContent = total.toFixed(2) + '€';
+  }
 
   updateSubmitBtn(true);
   updateWhatsAppLink();
@@ -746,28 +1089,15 @@ function updateSubmitBtn(hasItems) {
   const btn = document.getElementById('submitBtn');
   const label = document.getElementById('submitLabel');
   const lang = currentLang;
-  if (!hasItems) {
-    btn.disabled = true;
-    label.textContent = lang === 'fr' ? '🛒 Ajoutez des plats pour commander' : '🛒 Add dishes to order';
-    return;
-  }
-  if (!paymentMethod) {
-    btn.disabled = true;
-    label.textContent = lang === 'fr' ? '💳 Choisissez un mode de paiement' : '💳 Choose a payment method';
-    return;
-  }
+  if (!hasItems) { btn.disabled = true; label.textContent = lang === 'fr' ? '🛒 Ajoutez des plats pour commander' : '🛒 Add dishes to order'; return; }
+  if (!paymentMethod) { btn.disabled = true; label.textContent = lang === 'fr' ? '💳 Choisissez un mode de paiement' : '💳 Choose a payment method'; return; }
   btn.disabled = false;
   const total = cartTotal();
-  if (paymentMethod === 'card') {
-    label.textContent = lang === 'fr' ? `🔒 Payer ${total}€ par carte` : `🔒 Pay ${total}€ by card`;
-  } else {
-    label.textContent = lang === 'fr' ? `✅ Confirmer ma commande (${total}€ en espèces)` : `✅ Confirm order (${total}€ cash)`;
-  }
+  if (paymentMethod === 'card') label.textContent = lang === 'fr' ? `🔒 Payer ${total.toFixed(2)}€ par carte` : `🔒 Pay €${total.toFixed(2)} by card`;
+  else label.textContent = lang === 'fr' ? `✅ Confirmer (${total.toFixed(2)}€ en espèces)` : `✅ Confirm order (€${total.toFixed(2)} cash)`;
 }
 
-/* ══════════════════════════════════════
-   PAYMENT
-══════════════════════════════════════ */
+/* ══════ PAYMENT ══════ */
 function selectPayment(method) {
   paymentMethod = method;
   document.getElementById('opt-card').classList.toggle('selected', method === 'card');
@@ -788,22 +1118,20 @@ function initStripe() {
     stripeCardElement.mount('#card-element');
     stripeCardElement.on('change', e => { document.getElementById('card-errors').textContent = e.error ? e.error.message : ''; });
   } catch(e) {
-    document.getElementById('card-element').innerHTML = `<div style="background:#fff8f3;border:1.5px solid #f5a050;border-radius:10px;padding:14px 16px;"><p style="font-size:0.85rem;color:#7A5C35;line-height:1.6;margin:0"><strong style="color:#B84D10">🔧 Stripe setup required</strong><br>1. Create a free account at <a href="https://stripe.com" target="_blank" style="color:#E8641A">stripe.com</a><br>2. Copy your public key <code>pk_test_...</code><br>3. Replace <code>stripe_public_key</code> in the CONFIG block</p></div>`;
+    document.getElementById('card-element').innerHTML = `<div style="background:#fff8f3;border:1.5px solid #f5a050;border-radius:10px;padding:14px"><p style="font-size:0.85rem;color:#7A5C35"><strong style="color:#B84D10">🔧 Stripe setup required</strong><br>Replace <code>stripe_public_key</code> in CONFIG with your <code>pk_test_...</code> key from stripe.com</p></div>`;
   }
 }
 
-/* ══════════════════════════════════════
-   WHATSAPP
-══════════════════════════════════════ */
+/* ══════ WHATSAPP ══════ */
 function buildWhatsAppMessage() {
   const name = document.getElementById('f-name').value || 'Customer';
   const date = document.getElementById('f-date').value || 'TBD';
   const items = getCartDishes();
-  let msg = `🍛 *New order — Jaffna Samayal*\n\n`;
-  msg += `👤 *Name:* ${name}\n📅 *Date:* ${date}\n\n📋 *Order:*\n`;
-  items.forEach(({dish, qty}) => { msg += `  • ${qty}× ${dish.name} — ${dish.price * qty}€\n`; });
-  msg += `\n💰 *Total: ${cartTotal()}€*`;
+  let msg = `🍛 *New order — Jaffna Samayal*\n\n👤 *Name:* ${name}\n📅 *Date:* ${date}\n\n📋 *Order:*\n`;
+  items.forEach(({dish, qty}) => { msg += `  • ${qty}× ${dish.name} — €${(dish.price * qty).toFixed(2)}\n`; });
+  msg += `\n💰 *Total: €${cartTotal().toFixed(2)}*`;
   msg += `\n💳 *Payment:* ${paymentMethod === 'card' ? 'Card (online)' : 'Cash on delivery'}`;
+  if (cachedDeliveryKm) msg += `\n📍 *Distance:* ${cachedDeliveryKm.toFixed(1)} km`;
   const notes = document.getElementById('f-notes').value;
   if (notes) msg += `\n📝 *Notes:* ${notes}`;
   return encodeURIComponent(msg);
@@ -811,55 +1139,45 @@ function buildWhatsAppMessage() {
 
 function updateWhatsAppLink() {
   const waBtn = document.getElementById('waBtn');
-  if (cartCount() > 0) {
-    waBtn.style.display = 'flex';
-    waBtn.href = `https://wa.me/${CONFIG.whatsapp_number}?text=${buildWhatsAppMessage()}`;
-  } else {
-    waBtn.style.display = 'none';
-  }
+  if (cartCount() > 0) { waBtn.style.display = 'flex'; waBtn.href = `https://wa.me/${CONFIG.whatsapp_number}?text=${buildWhatsAppMessage()}`; }
+  else waBtn.style.display = 'none';
 }
 
-/* ══════════════════════════════════════
-   EMAIL
-══════════════════════════════════════ */
+/* ══════ EMAIL ══════ */
 function sendEmail(orderData) {
   if (typeof emailjs === 'undefined') return Promise.resolve();
   emailjs.init(CONFIG.emailjs_public_key);
   return emailjs.send(CONFIG.emailjs_service_id, CONFIG.emailjs_template_id, {
     to_name: 'Jaffna Samayal', client_name: orderData.name, client_email: orderData.email,
     client_phone: orderData.phone, address: orderData.address, delivery_date: orderData.date,
-    order_items: orderData.itemsText, order_total: orderData.total + '€',
+    order_items: orderData.itemsText, order_total: orderData.total,
     payment: orderData.payment, notes: orderData.notes || 'None', reply_to: orderData.email,
   });
 }
 
-/* ══════════════════════════════════════
-   SUBMIT
-══════════════════════════════════════ */
+/* ══════ SUBMIT ══════ */
 async function submitOrder() {
   const name    = document.getElementById('f-name').value.trim();
   const email   = document.getElementById('f-email').value.trim();
   const address = document.getElementById('f-address').value.trim();
   const date    = document.getElementById('f-date').value;
   const lang    = currentLang;
-
   if (!name || !email || !address || !date) { showNotif(lang === 'fr' ? '⚠️ Merci de remplir tous les champs obligatoires.' : '⚠️ Please fill in all required fields.'); return; }
   if (!paymentMethod) { showNotif(lang === 'fr' ? '💳 Choisissez un mode de paiement.' : '💳 Choose a payment method.'); return; }
   if (cartCount() === 0) { showNotif(lang === 'fr' ? '🛒 Votre panier est vide.' : '🛒 Your cart is empty.'); return; }
-
   const btn = document.getElementById('submitBtn');
   const label = document.getElementById('submitLabel');
   btn.disabled = true;
   label.textContent = lang === 'fr' ? '⏳ Traitement en cours...' : '⏳ Processing...';
-
   const items = getCartDishes();
-  const itemsText = items.map(({dish, qty}) => `${qty}× ${dish.name} (${dish.price * qty}€)`).join(', ');
+  const itemsText = items.map(({dish, qty}) => `${qty}× ${dish.name} (€${(dish.price * qty).toFixed(2)})`).join(', ');
+  const deliveryInfo = cachedDeliveryKm ? `${cachedDeliveryKm.toFixed(1)} km` : 'TBD';
   const orderData = {
     name, email, phone: document.getElementById('f-phone').value, address, date,
-    notes: document.getElementById('f-notes').value, itemsText, total: cartTotal(),
+    notes: document.getElementById('f-notes').value, itemsText,
+    total: `€${cartTotal().toFixed(2)} (livraison: ${deliveryInfo})`,
     payment: paymentMethod === 'card' ? 'Credit card' : 'Cash on delivery'
   };
-
   try {
     if (paymentMethod === 'card' && stripeInstance && stripeCardElement) {
       label.textContent = lang === 'fr' ? '🔒 Vérification du paiement...' : '🔒 Verifying payment...';
@@ -868,18 +1186,17 @@ async function submitOrder() {
     label.textContent = lang === 'fr' ? '📧 Envoi de la confirmation...' : '📧 Sending confirmation...';
     await sendEmail(orderData);
     window.open(`https://wa.me/${CONFIG.whatsapp_number}?text=${buildWhatsAppMessage()}`, '_blank');
-
     document.getElementById('successMsg').textContent = lang === 'fr'
-      ? `Merci ${name} ! Votre commande de ${cartTotal()}€ est confirmée. Un email a été envoyé à ${email}.`
-      : `Thank you ${name}! Your order of ${cartTotal()}€ is confirmed. A confirmation email has been sent to ${email}.`;
+      ? `Merci ${name} ! Votre commande de €${cartTotal().toFixed(2)} est confirmée. Un email a été envoyé à ${email}.`
+      : `Thank you ${name}! Your order of €${cartTotal().toFixed(2)} is confirmed. A confirmation email was sent to ${email}.`;
     document.getElementById('successOverlay').classList.add('show');
-
-    cartItems = {}; paymentMethod = null;
+    cartItems = {}; paymentMethod = null; cachedDeliveryKm = null;
     document.getElementById('opt-card').classList.remove('selected');
     document.getElementById('opt-cash').classList.remove('selected');
     document.getElementById('stripe-section').style.display = 'none';
     document.getElementById('cash-section').style.display = 'none';
     document.getElementById('orderForm').reset();
+    document.getElementById('formDeliveryInfo').classList.remove('show');
     stripeCardElement = null;
     renderCart();
   } catch(err) {
@@ -889,17 +1206,17 @@ async function submitOrder() {
   }
 }
 
-/* ══════════════════════════════════════
-   MENU RENDER
-══════════════════════════════════════ */
+/* ══════ MENU RENDER ══════ */
 function renderMenu(filter) {
+  currentMenuFilter = filter;
   const grid = document.getElementById('menuGrid');
   const filtered = filter === 'all' ? dishes : dishes.filter(d => d.cat === filter);
   const lang = currentLang;
   grid.innerHTML = filtered.map(d => `
     <div class="dish-card">
       <div class="dish-visual">
-        <span style="font-size:4.5rem">${d.emoji}</span>
+        <img src="${d.img}" alt="${d.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="dish-visual-fallback" style="display:none">🍛</div>
         ${d.spice ? `<span class="dish-spice-level">${d.spice}</span>` : ''}
         ${d.isNew ? `<span class="dish-badge-new">${lang === 'fr' ? 'Nouveau' : 'New'}</span>` : ''}
       </div>
@@ -907,7 +1224,7 @@ function renderMenu(filter) {
         <div class="dish-name">${d.name}</div>
         <div class="dish-desc">${lang === 'fr' ? d.desc_fr : d.desc_en}</div>
         <div class="dish-footer">
-          <div class="dish-price">${d.price}€ <span>/ ${lang === 'fr' ? 'portion' : 'serving'}</span></div>
+          <div class="dish-price">${d.price.toFixed(2)}€ <span>/ ${lang === 'fr' ? 'portion' : 'serving'}</span></div>
           <button class="dish-order-btn" data-dish-id="${d.id}" onclick="addToCart(${d.id})" title="${lang === 'fr' ? 'Ajouter au panier' : 'Add to cart'}">+</button>
         </div>
       </div>
@@ -921,9 +1238,7 @@ function filterMenu(cat, btn) {
   renderMenu(cat);
 }
 
-/* ══════════════════════════════════════
-   UTILS
-══════════════════════════════════════ */
+/* ══════ UTILS ══════ */
 function showNotif(msg) {
   const n = document.getElementById('notif');
   n.textContent = msg; n.classList.add('show');
@@ -939,13 +1254,11 @@ document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
 });
 
-// Scroll reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Count up
 function countUp(el) {
   const target = parseInt(el.dataset.count); let cur = 0;
   const t = setInterval(() => {
@@ -959,7 +1272,6 @@ const cObs = new IntersectionObserver((entries) => {
 });
 document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
 
-// Min date (+48h)
 const dateInput = document.getElementById('f-date');
 if (dateInput) {
   const min = new Date(); min.setDate(min.getDate() + 2);
@@ -967,7 +1279,11 @@ if (dateInput) {
   dateInput.value = min.toISOString().split('T')[0];
 }
 
-// Init — EN by default
+// Sync address field with delivery calculator
+document.getElementById('f-address').addEventListener('keypress', e => {
+  if (e.key === 'Enter') { e.preventDefault(); calcDeliveryFromForm(); }
+});
+
 renderMenu('all');
 renderCart();
 </script>
