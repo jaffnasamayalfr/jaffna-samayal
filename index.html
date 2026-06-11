@@ -3,7 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jaffna Samayal — Tamil Sri Lankan Cuisine</title>
+
+<!-- ═══ SEO ═══ -->
+<title>Jaffna Samayal — Cuisine Tamoule Sri-Lankaise | Rosny-sous-Bois</title>
+<meta name="description" content="Jaffna Samayal — Cuisine tamoule authentique faite maison depuis Rosny-sous-Bois (93110). Beef Curry, Chicken Biryani, Samosas. Livraison partout en France. Commandez en ligne ou sur WhatsApp.">
+<meta name="keywords" content="Jaffna Samayal, cuisine tamoule, Sri Lanka, Rosny-sous-Bois, livraison curry tamoul, restaurant tamoul France, jaffna food, tamil food france, curry sri lankais">
+<meta name="author" content="Jaffna Samayal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://jaffnasamayalfr.github.io/jaffna-samayal/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jaffna Samayal — Cuisine Tamoule Sri-Lankaise">
+<meta property="og:description" content="Cuisine tamoule authentique faite maison depuis Rosny-sous-Bois. Livraison partout en France. Beef Curry, Biryani, Samosas.">
+<meta property="og:url" content="https://jaffnasamayalfr.github.io/jaffna-samayal/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Jaffna Samayal">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jaffna Samayal — Cuisine Tamoule Sri-Lankaise">
+<meta name="twitter:description" content="Cuisine tamoule authentique faite maison depuis Rosny-sous-Bois. Livraison partout en France.">
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  "name": "Jaffna Samayal",
+  "alternateName": "ஜாஃப்னா சமையல்",
+  "description": "Cuisine tamoule authentique faite maison depuis Rosny-sous-Bois. Recettes familiales de Jaffna, Sri Lanka.",
+  "url": "https://jaffnasamayalfr.github.io/jaffna-samayal/",
+  "telephone": "+33751392075",
+  "email": "bonjour@jaffnasamayal.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Rosny-sous-Bois",
+    "postalCode": "93110",
+    "addressRegion": "Île-de-France",
+    "addressCountry": "FR"
+  },
+  "servesCuisine": ["Tamil", "Sri Lankan", "Indian"],
+  "hasDeliveryMethod": "DeliveryModeDirectDelivery",
+  "areaServed": "France",
+  "openingHours": "Mo-Sa 09:00-20:00",
+  "priceRange": "€",
+  "sameAs": [
+    "https://wa.me/33751392075"
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -47,7 +97,6 @@
   [data-lang="fr"]{display:none;}
   body.lang-fr [data-lang="en"]{display:none;}
   body.lang-fr [data-lang="fr"]{display:revert;}
-  /* inline span/a */
   span[data-lang],a[data-lang]{display:inline;}
   [data-lang="fr"]:is(span,a){display:none;}
   body.lang-fr [data-lang="fr"]:is(span,a){display:inline;}
@@ -389,7 +438,6 @@
           <ellipse cx="270" cy="296" rx="35" ry="20" fill="#D4851A" opacity="0.9"/>
           <ellipse cx="160" cy="325" rx="30" ry="16" fill="#D4A017" opacity="0.85"/>
           <ellipse cx="240" cy="322" rx="22" ry="12" fill="#2d9b2d" opacity="0.8"/>
-          <path d="M198 175 Q200 162 202 175 Q203 167 201 178 Q200 182 199 178 Q197 167 198 175Z" fill="#F0C84A" opacity="0.8"/>
           <text x="200" y="440" text-anchor="middle" font-size="18" fill="#D4A017" font-family="serif" opacity="0.85">ஜாஃப்னா சமையல்</text>
           <text x="200" y="465" text-anchor="middle" font-size="11" fill="rgba(212,160,23,0.4)" font-family="serif" letter-spacing="3">JAFFNA SAMAYAL</text>
         </svg>
@@ -696,29 +744,17 @@
    CONFIG — MODIFIEZ CES VALEURS
 ══════════════════════════════════════ */
 const CONFIG = {
-  /* EmailJS — emailjs.com (gratuit 200 emails/mois) */
   emailjs_public_key:  'VOTRE_CLE_PUBLIQUE_EMAILJS',
   emailjs_service_id:  'VOTRE_SERVICE_ID',
   emailjs_template_id: 'VOTRE_TEMPLATE_ID',
-
-  /* Stripe — stripe.com, copiez votre pk_test_... */
-  stripe_public_key: 'pk_test_VOTRE_CLE_STRIPE_ICI',
-
-  /* WhatsApp — votre numéro sans le + */
-  whatsapp_number: '33751392075',
-
-  /* ✅ POINT DE DÉPART FIXÉ : Rosny-sous-Bois, 93110 */
-  restaurant_lat:  48.8731,
-  restaurant_lng:  2.4889,
-  restaurant_name: 'Rosny-sous-Bois, 93110',
-
-  /* Livraison offerte à partir de (€) sur courte distance */
+  stripe_public_key:   'pk_test_VOTRE_CLE_STRIPE_ICI',
+  whatsapp_number:     '33751392075',
+  restaurant_lat:      48.8731,
+  restaurant_lng:      2.4889,
+  restaurant_name:     'Rosny-sous-Bois, 93110',
   free_delivery_threshold: 60,
 };
 
-/* ══════════════════════════════════════
-   TARIFS LIVRAISON — à partir de 3 km = 3€
-══════════════════════════════════════ */
 const DELIVERY_TIERS = [
   { max: 3,     fee: 0,     label_fr: 'Gratuit',              label_en: 'Free'               },
   { max: 10,    fee: 3.00,  label_fr: '3,00 €',               label_en: '€3.00'              },
@@ -731,7 +767,6 @@ const DELIVERY_TIERS = [
 function getDeliveryFee(km, subtotal) {
   for (const t of DELIVERY_TIERS) {
     if (km <= t.max) {
-      /* Livraison gratuite si commande >= seuil ET distance <= 3 km */
       if (subtotal >= CONFIG.free_delivery_threshold && km <= 3) {
         return { fee: 0, isFree: true, label_fr: '🎉 Gratuit', label_en: '🎉 Free' };
       }
@@ -759,7 +794,7 @@ function setLang(lang) {
 }
 
 /* ══════════════════════════════════════
-   GÉOCODAGE & CALCUL DISTANCE
+   GÉOCODAGE & DISTANCE
 ══════════════════════════════════════ */
 async function geocodeAddress(address) {
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&countrycodes=fr&limit=1`;
@@ -781,7 +816,6 @@ let cachedDeliveryKm  = null;
 let cachedDeliveryFee = null;
 let cachedClientAddr  = '';
 
-/* Calculateur section livraison */
 async function calcDelivery() {
   const addr = document.getElementById('calcAddress').value.trim();
   if (!addr) return;
@@ -806,7 +840,6 @@ async function calcDelivery() {
   loading.classList.remove('show');
 }
 
-/* Calculateur dans le formulaire */
 async function calcDeliveryFromForm() {
   const addr = document.getElementById('f-address').value.trim();
   if (!addr || addr.length < 5) return;
@@ -839,7 +872,7 @@ function onAddressInput() {
 }
 
 /* ══════════════════════════════════════
-   DONNÉES MENU
+   MENU DATA
 ══════════════════════════════════════ */
 const dishes = [
   { id:1,  name:'Beef Curry',          cat:'plat',    price:6.99,
@@ -898,8 +931,8 @@ function getCartDishes() {
     .filter(([,qty]) => qty > 0)
     .map(([id, qty]) => ({ dish: dishes.find(d => d.id === parseInt(id)), qty }));
 }
-function cartTotal()  { return getCartDishes().reduce((s,{dish,qty}) => s + dish.price * qty, 0); }
-function cartCount()  { return Object.values(cartItems).reduce((a,b) => a+b, 0); }
+function cartTotal() { return getCartDishes().reduce((s,{dish,qty}) => s + dish.price * qty, 0); }
+function cartCount() { return Object.values(cartItems).reduce((a,b) => a+b, 0); }
 
 function renderCart() {
   const list  = document.getElementById('cartList');
@@ -908,7 +941,6 @@ function renderCart() {
   const sub   = cartTotal();
   const lang  = currentLang;
 
-  /* FAB badge */
   const fab = document.getElementById('cartCount');
   fab.textContent = count;
   if (count > 0) { fab.classList.remove('bump'); void fab.offsetWidth; fab.classList.add('bump'); }
@@ -937,7 +969,6 @@ function renderCart() {
       <button class="cart-item-remove" onclick="removeItem(${dish.id})">✕</button>
     </div>`).join('');
 
-  /* Totaux */
   document.getElementById('cartTotals').style.display = 'block';
   document.getElementById('subtotalVal').textContent = sub.toFixed(2) + '€';
 
@@ -955,11 +986,10 @@ function renderCart() {
       document.getElementById('totalVal').textContent = (sub + info.fee).toFixed(2) + '€';
     }
   } else {
-    /* Pas encore d'adresse calculée */
     document.getElementById('freeDeliveryRow').style.display = 'none';
     document.getElementById('deliveryRow').style.display     = 'flex';
     document.getElementById('deliveryVal').textContent = lang === 'fr' ? '📍 Entrez votre adresse' : '📍 Enter your address';
-    document.getElementById('totalVal').textContent    = sub.toFixed(2) + '€ + livraison';
+    document.getElementById('totalVal').textContent    = sub.toFixed(2) + (lang==='fr'?' € + livraison':' € + delivery');
   }
 
   updateSubmitBtn(true);
@@ -988,13 +1018,11 @@ function updateSubmitBtn(hasItems) {
   const label = document.getElementById('submitLabel');
   const lang  = currentLang;
   const sub   = cartTotal();
-
-  /* Calcul total avec livraison */
-  let total = sub;
+  let total   = sub;
   if (cachedDeliveryFee !== null) total += cachedDeliveryFee;
 
   if (!hasItems) {
-    btn.disabled     = true;
+    btn.disabled      = true;
     label.textContent = lang === 'fr' ? '🛒 Ajoutez des plats pour commander' : '🛒 Add dishes to order';
     return;
   }
@@ -1005,13 +1033,9 @@ function updateSubmitBtn(hasItems) {
   }
   btn.disabled = false;
   if (paymentMethod === 'card') {
-    label.textContent = lang === 'fr'
-      ? `🔒 Payer ${total.toFixed(2)}€ par carte`
-      : `🔒 Pay €${total.toFixed(2)} by card`;
+    label.textContent = lang === 'fr' ? `🔒 Payer ${total.toFixed(2)}€ par carte` : `🔒 Pay €${total.toFixed(2)} by card`;
   } else {
-    label.textContent = lang === 'fr'
-      ? `✅ Confirmer — ${total.toFixed(2)}€ en espèces`
-      : `✅ Confirm order — €${total.toFixed(2)} cash`;
+    label.textContent = lang === 'fr' ? `✅ Confirmer — ${total.toFixed(2)}€ en espèces` : `✅ Confirm order — €${total.toFixed(2)} cash`;
   }
 }
 
@@ -1056,24 +1080,18 @@ function initStripe() {
 }
 
 /* ══════════════════════════════════════
-   MESSAGE WHATSAPP — CORRIGÉ
-   ✅ Vrai nom du client
-   ✅ Adresse réelle
-   ✅ Total avec livraison
+   WHATSAPP
 ══════════════════════════════════════ */
 function buildWhatsAppMessage() {
-  const lang     = currentLang;
-  /* ✅ Nom réel du client depuis le formulaire */
-  const name     = document.getElementById('f-name').value.trim() || (lang === 'fr' ? 'Client' : 'Customer');
-  const email    = document.getElementById('f-email').value.trim();
-  const phone    = document.getElementById('f-phone').value.trim();
-  const date     = document.getElementById('f-date').value || 'TBD';
-  /* ✅ Adresse réelle du client */
-  const address  = cachedClientAddr || document.getElementById('f-address').value.trim() || 'TBD';
-  const notes    = document.getElementById('f-notes').value.trim();
-  const items    = getCartDishes();
-  const sub      = cartTotal();
-  /* ✅ Frais de livraison inclus */
+  const lang    = currentLang;
+  const name    = document.getElementById('f-name').value.trim() || (lang==='fr'?'Client':'Customer');
+  const email   = document.getElementById('f-email').value.trim();
+  const phone   = document.getElementById('f-phone').value.trim();
+  const date    = document.getElementById('f-date').value || 'TBD';
+  const address = cachedClientAddr || document.getElementById('f-address').value.trim() || 'TBD';
+  const notes   = document.getElementById('f-notes').value.trim();
+  const items   = getCartDishes();
+  const sub     = cartTotal();
   const delivery = cachedDeliveryFee !== null ? cachedDeliveryFee : 0;
   const total    = sub + delivery;
 
@@ -1081,12 +1099,10 @@ function buildWhatsAppMessage() {
   msg += `👤 *${lang==='fr'?'Nom':'Name'}:* ${name}\n`;
   if (email) msg += `✉️ *Email:* ${email}\n`;
   if (phone) msg += `📞 *${lang==='fr'?'Téléphone':'Phone'}:* ${phone}\n`;
-  msg += `📍 *${lang==='fr'?'Adresse de livraison':'Delivery address'}:* ${address}\n`;
-  msg += `📅 *${lang==='fr'?'Date souhaitée':'Requested date'}:* ${date}\n\n`;
-  msg += `📋 *${lang==='fr'?'Plats commandés':'Order'}:*\n`;
-  items.forEach(({dish,qty}) => {
-    msg += `  • ${qty}× ${dish.name} — €${(dish.price*qty).toFixed(2)}\n`;
-  });
+  msg += `📍 *${lang==='fr'?'Adresse':'Address'}:* ${address}\n`;
+  msg += `📅 *${lang==='fr'?'Date souhaitée':'Date'}:* ${date}\n\n`;
+  msg += `📋 *${lang==='fr'?'Commande':'Order'}:*\n`;
+  items.forEach(({dish,qty}) => { msg += `  • ${qty}× ${dish.name} — €${(dish.price*qty).toFixed(2)}\n`; });
   msg += `\n💶 *${lang==='fr'?'Sous-total':'Subtotal'}:* €${sub.toFixed(2)}\n`;
   if (cachedDeliveryKm !== null) {
     msg += `🚚 *${lang==='fr'?'Livraison':'Delivery'} (${cachedDeliveryKm.toFixed(1)} km):* `;
@@ -1094,9 +1110,8 @@ function buildWhatsAppMessage() {
     msg += '\n';
   }
   msg += `💰 *Total: €${total.toFixed(2)}*\n`;
-  msg += `💳 *${lang==='fr'?'Paiement':'Payment'}:* ${paymentMethod==='card'?(lang==='fr'?'Carte bancaire (Stripe)':'Credit card (Stripe)'):(lang==='fr'?'Espèces à la livraison':'Cash on delivery')}\n`;
-  if (notes) msg += `📝 *${lang==='fr'?'Notes':'Notes'}:* ${notes}\n`;
-
+  msg += `💳 *${lang==='fr'?'Paiement':'Payment'}:* ${paymentMethod==='card'?(lang==='fr'?'Carte (Stripe)':'Card (Stripe)'):(lang==='fr'?'Espèces':'Cash')}\n`;
+  if (notes) msg += `📝 *Notes:* ${notes}\n`;
   return encodeURIComponent(msg);
 }
 
@@ -1111,7 +1126,7 @@ function updateWhatsAppLink() {
 }
 
 /* ══════════════════════════════════════
-   EMAIL (EmailJS)
+   EMAIL
 ══════════════════════════════════════ */
 function sendEmail(orderData) {
   if (typeof emailjs === 'undefined') return Promise.resolve();
@@ -1135,7 +1150,7 @@ function sendEmail(orderData) {
 }
 
 /* ══════════════════════════════════════
-   SOUMETTRE LA COMMANDE
+   SOUMETTRE
 ══════════════════════════════════════ */
 async function submitOrder() {
   const lang    = currentLang;
@@ -1170,18 +1185,18 @@ async function submitOrder() {
 
   const orderData = {
     name, email,
-    phone:    document.getElementById('f-phone').value,
-    address:  cachedClientAddr || address,
+    phone:     document.getElementById('f-phone').value,
+    address:   cachedClientAddr || address,
     date, subtotal: sub, delivery, distance: dist,
-    notes:    document.getElementById('f-notes').value,
+    notes:     document.getElementById('f-notes').value,
     itemsText: items.map(({dish,qty}) => `${qty}× ${dish.name} (€${(dish.price*qty).toFixed(2)})`).join(', '),
-    payment:  paymentMethod==='card'?'Credit card (Stripe)':'Cash on delivery',
+    payment:   paymentMethod==='card'?'Credit card (Stripe)':'Cash on delivery',
   };
 
   try {
     if (paymentMethod === 'card' && stripeInstance && stripeCardElement) {
       label.textContent = lang==='fr'?'🔒 Vérification du paiement...':'🔒 Verifying payment...';
-      await new Promise(r => setTimeout(r, 1000)); /* Remplacer par vrai PaymentIntent en prod */
+      await new Promise(r => setTimeout(r, 1000));
     }
     label.textContent = lang==='fr'?'📧 Envoi de la confirmation...':'📧 Sending confirmation...';
     await sendEmail(orderData);
@@ -1192,7 +1207,6 @@ async function submitOrder() {
       : `Thank you ${name}! Your order of €${total.toFixed(2)} is confirmed. Email sent to ${email}.`;
     document.getElementById('successOverlay').classList.add('show');
 
-    /* Reset */
     cartItems = {}; paymentMethod = null; cachedDeliveryKm = null; cachedDeliveryFee = null; cachedClientAddr = '';
     document.getElementById('opt-card').classList.remove('selected');
     document.getElementById('opt-cash').classList.remove('selected');
@@ -1202,8 +1216,8 @@ async function submitOrder() {
     document.getElementById('orderForm').reset();
     stripeCardElement = null;
     renderCart();
-    const min = new Date(); min.setDate(min.getDate()+2);
-    document.getElementById('f-date').value = min.toISOString().split('T')[0];
+    const minD = new Date(); minD.setDate(minD.getDate()+2);
+    document.getElementById('f-date').value = minD.toISOString().split('T')[0];
 
   } catch(err) {
     console.error(err);
@@ -1213,7 +1227,7 @@ async function submitOrder() {
 }
 
 /* ══════════════════════════════════════
-   RENDU MENU
+   MENU RENDER
 ══════════════════════════════════════ */
 function renderMenu(filter) {
   currentMenuFilter = filter;
@@ -1248,7 +1262,7 @@ function filterMenu(cat, btn) {
 }
 
 /* ══════════════════════════════════════
-   UTILITAIRES
+   UTILS
 ══════════════════════════════════════ */
 function showNotif(msg) {
   const n = document.getElementById('notif');
@@ -1283,7 +1297,6 @@ const cObs = new IntersectionObserver((entries) => {
 });
 document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
 
-/* Date minimum +48h */
 const dateInput = document.getElementById('f-date');
 if (dateInput) {
   const min = new Date(); min.setDate(min.getDate()+2);
@@ -1291,12 +1304,11 @@ if (dateInput) {
   dateInput.value = min.toISOString().split('T')[0];
 }
 
-/* Touche Entrée dans le champ adresse */
 document.getElementById('f-address').addEventListener('keypress', e => {
   if (e.key === 'Enter') { e.preventDefault(); calcDeliveryFromForm(); }
 });
 
-/* Restaurer la langue si sauvegardée */
+/* Restaurer la langue */
 const savedLang = localStorage.getItem('js_lang');
 if (savedLang) setLang(savedLang);
 
